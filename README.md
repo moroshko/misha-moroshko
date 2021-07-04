@@ -1,1 +1,1 @@
-# [Personal website](https://misha.moroshko.com)
+# [Personal website](https://www.moroshko.me)

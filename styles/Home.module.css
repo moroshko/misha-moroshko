@@ -1,3 +1,33 @@
 .main {
-  text-align: center;
+  margin-top: 32px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.myPictureContainer {
+  margin-top: 16px;
+  width: 200px;
+  height: 200px;
+  padding: 4px;
+  border-radius: 50%;
+  border: 1px solid #d6d3d1;
+}
+.myPicture {
+  border-radius: 50%;
+}
+@media (min-width: 720px) {
+  .main {
+    margin-top: 64px;
+  }
+  .introContainer {
+    position: relative;
+    padding-right: 240px;
+  }
+  .myPictureContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
