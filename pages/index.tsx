@@ -55,31 +55,29 @@ export default function Home() {
           </ExternalLink>
           .
         </p>
-        <p>
-          You can find me online on:
-          <ul>
-            <li>
-              <ExternalLink href="https://twitter.com/moroshko">
-                Twitter
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://github.com/moroshko">
-                GitHub
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://stackoverflow.com/users/247243/misha-moroshko">
-                Stack Overflow
-              </ExternalLink>
-            </li>
-            <li>
-              <ExternalLink href="https://au.linkedin.com/in/moroshko">
-                LinkedIn
-              </ExternalLink>
-            </li>
-          </ul>
-        </p>
+        <p>You can find me online on:</p>
+        <ul>
+          <li>
+            <ExternalLink href="https://twitter.com/moroshko">
+              Twitter
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://github.com/moroshko">
+              GitHub
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://stackoverflow.com/users/247243/misha-moroshko">
+              Stack Overflow
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://au.linkedin.com/in/moroshko">
+              LinkedIn
+            </ExternalLink>
+          </li>
+        </ul>
       </main>
     </div>
   );
