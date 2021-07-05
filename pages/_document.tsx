@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Splitbee from "../components/Splitbee";
 
 export default class MyDocument extends Document {
   render() {
@@ -12,7 +11,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
           />
         </Head>
-        <Splitbee />
         <body>
           <Main />
           <NextScript />
