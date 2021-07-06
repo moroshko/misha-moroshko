@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import parseLinkHeader from "parse-link-header";
 import ExternalLink from "../components/ExternalLink";
+import Highlight from "../components/Highlight";
+import List from "../components/List";
 import { formatWithCommas } from "../utils/numbers";
 import myPicture from "../public/images/misha.jpeg";
 import styles from "../styles/Home.module.css";
@@ -52,10 +54,26 @@ export default function Home({
             />
           </div>
           <p>
-            I’m a Front End engineer and a UX enthusiast from Melbourne,
-            Australia. I love bootstrapping new products and engineering teams.
+            {`I’m a `}
+            <Highlight color="red" delay={1000}>
+              Front End engineer
+            </Highlight>
+            {` and a `}
+            <Highlight color="green" delay={2000}>
+              UX enthusiast
+            </Highlight>
+            {` from Melbourne, Australia. I love bootstrapping new products and engineering teams.`}
           </p>
-          <p>Design Systems and Open Source are very close to my heart.</p>
+          <p>
+            <Highlight color="yellow" delay={3000}>
+              Design Systems
+            </Highlight>
+            {` and `}
+            <Highlight color="purple" delay={4000}>
+              Open Source
+            </Highlight>
+            {` are very close to my heart.`}
+          </p>
         </div>
         <p>
           {`I worked at great companies like `}
@@ -85,52 +103,52 @@ export default function Home({
           .
         </p>
         <p>Here are some fun facts about me:</p>
-        <ul>
+        <List>
           {gitHubData && (
-            <li>
+            <List.Item>
               I have {formatWithCommas(gitHubData.totalStars)} stars on public
               GitHub repositories.
-            </li>
+            </List.Item>
           )}
           {stackOverflowData && (
-            <li>
+            <List.Item>
               I earned {formatWithCommas(stackOverflowData.badges.gold)} gold
               badges, {formatWithCommas(stackOverflowData.badges.silver)} silver
               badges and {formatWithCommas(stackOverflowData.badges.bronze)}{" "}
               bronze badges on Stack Overflow, with a total reputation of{" "}
               {formatWithCommas(stackOverflowData.reputation)}.
-            </li>
+            </List.Item>
           )}
           {lichessData && (
-            <li>
+            <List.Item>
               My rapid chess rating on Lichess is {lichessData.rapidRating}.
               Invite me for a game!
-            </li>
+            </List.Item>
           )}
-        </ul>
+        </List>
         <p>You can find me online on:</p>
-        <ul>
-          <li>
+        <List>
+          <List.Item>
             <ExternalLink href="https://twitter.com/moroshko">
               Twitter
             </ExternalLink>
-          </li>
-          <li>
+          </List.Item>
+          <List.Item>
             <ExternalLink href="https://github.com/moroshko">
               GitHub
             </ExternalLink>
-          </li>
-          <li>
+          </List.Item>
+          <List.Item>
             <ExternalLink href="https://stackoverflow.com/users/247243/misha-moroshko">
               Stack Overflow
             </ExternalLink>
-          </li>
-          <li>
+          </List.Item>
+          <List.Item>
             <ExternalLink href="https://au.linkedin.com/in/moroshko">
               LinkedIn
             </ExternalLink>
-          </li>
-        </ul>
+          </List.Item>
+        </List>
       </main>
     </div>
   );
