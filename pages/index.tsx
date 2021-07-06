@@ -24,9 +24,9 @@ type LichessData = {
 };
 
 type Props = {
-  stackOverflowData: StackOverflowData;
-  gitHubData: GitHubData;
-  lichessData: LichessData;
+  stackOverflowData: StackOverflowData | null;
+  gitHubData: GitHubData | null;
+  lichessData: LichessData | null;
 };
 
 export default function Home({
@@ -86,21 +86,27 @@ export default function Home({
         </p>
         <p>Here are some fun facts about me:</p>
         <ul>
-          <li>
-            I have {formatWithCommas(gitHubData.totalStars)} stars on public
-            GitHub repositories.
-          </li>
-          <li>
-            I earned {formatWithCommas(stackOverflowData.badges.gold)} gold
-            badges, {formatWithCommas(stackOverflowData.badges.silver)} silver
-            badges and {formatWithCommas(stackOverflowData.badges.bronze)}{" "}
-            bronze badges on Stack Overflow, with a total reputation of{" "}
-            {formatWithCommas(stackOverflowData.reputation)}.
-          </li>
-          <li>
-            My rapid chess rating on Lichess is {lichessData.rapidRating}.
-            Invite me for a game!
-          </li>
+          {gitHubData && (
+            <li>
+              I have {formatWithCommas(gitHubData.totalStars)} stars on public
+              GitHub repositories.
+            </li>
+          )}
+          {stackOverflowData && (
+            <li>
+              I earned {formatWithCommas(stackOverflowData.badges.gold)} gold
+              badges, {formatWithCommas(stackOverflowData.badges.silver)} silver
+              badges and {formatWithCommas(stackOverflowData.badges.bronze)}{" "}
+              bronze badges on Stack Overflow, with a total reputation of{" "}
+              {formatWithCommas(stackOverflowData.reputation)}.
+            </li>
+          )}
+          {lichessData && (
+            <li>
+              My rapid chess rating on Lichess is {lichessData.rapidRating}.
+              Invite me for a game!
+            </li>
+          )}
         </ul>
         <p>You can find me online on:</p>
         <ul>
@@ -130,70 +136,84 @@ export default function Home({
   );
 }
 
-async function getStackOverflowData(): Promise<StackOverflowData> {
-  const response = await fetch(
-    "https://api.stackexchange.com/2.3/users/247243?site=stackoverflow"
-  );
-  const data = await response.json();
-
-  return {
-    reputation: data.items[0].reputation,
-    badges: {
-      gold: data.items[0].badge_counts.gold,
-      silver: data.items[0].badge_counts.silver,
-      bronze: data.items[0].badge_counts.bronze,
-    },
-  };
-}
-
-async function getGitHubData(): Promise<GitHubData> {
-  let totalStars = 0;
-  let nextUrl: string =
-    "https://api.github.com/users/moroshko/repos?type=public&per_page=100&page=1";
-
-  while (true) {
-    const response = await fetch(nextUrl);
+async function getStackOverflowData(): Promise<StackOverflowData | null> {
+  try {
+    const response = await fetch(
+      "https://api.stackexchange.com/2.3/users/247243?site=stackoverflow"
+    );
     const data = await response.json();
 
-    for (const repo of data) {
-      totalStars += repo.stargazers_count;
-    }
-
-    const linkHeader = response.headers.get("link");
-
-    if (!linkHeader) {
-      break;
-    }
-
-    const links = parseLinkHeader(linkHeader);
-
-    if (!links || !links.next) {
-      break;
-    }
-
-    nextUrl = links.next.url;
+    return {
+      reputation: data.items[0].reputation,
+      badges: {
+        gold: data.items[0].badge_counts.gold,
+        silver: data.items[0].badge_counts.silver,
+        bronze: data.items[0].badge_counts.bronze,
+      },
+    };
+  } catch (e) {
+    return null;
   }
-
-  return {
-    totalStars,
-  };
 }
 
-async function getLichessData(): Promise<LichessData> {
-  const response = await fetch(
-    "https://lichess.org/api/user/moroshko/perf/rapid"
-  );
-  const data = await response.json();
+async function getGitHubData(): Promise<GitHubData | null> {
+  try {
+    let totalStars = 0;
+    let nextUrl: string =
+      "https://api.github.com/users/moroshko/repos?type=public&per_page=100&page=1";
 
-  return {
-    rapidRating: Math.floor(data.perf.glicko.rating),
-  };
+    while (true) {
+      const response = await fetch(nextUrl);
+      const data = await response.json();
+
+      for (const repo of data) {
+        totalStars += repo.stargazers_count;
+      }
+
+      const linkHeader = response.headers.get("link");
+
+      if (!linkHeader) {
+        break;
+      }
+
+      const links = parseLinkHeader(linkHeader);
+
+      if (!links || !links.next) {
+        break;
+      }
+
+      nextUrl = links.next.url;
+    }
+
+    return {
+      totalStars,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function getLichessData(): Promise<LichessData | null> {
+  try {
+    const response = await fetch(
+      "https://lichess.org/api/user/moroshko/perf/rapid"
+    );
+    const data = await response.json();
+
+    return {
+      rapidRating: Math.floor(data.perf.glicko.rating),
+    };
+  } catch (e) {
+    return null;
+  }
 }
 
 export async function getServerSideProps() {
-  const stackOverflowData = await getStackOverflowData();
-  const gitHubData = await getGitHubData();
-  const lichessData = await getLichessData();
+  const [stackOverflowData, gitHubData, lichessData] = await Promise.all([
+    getStackOverflowData(),
+    getGitHubData(),
+    getLichessData(),
+  ]);
 
   return {
     props: {
