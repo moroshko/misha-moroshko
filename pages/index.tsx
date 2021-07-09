@@ -72,7 +72,7 @@ export default function Home({
             <Highlight color="purple" delay={4000}>
               Open Source
             </Highlight>
-            {` are very close to my heart.`}
+            {` have a special place in my heart.`}
           </p>
         </div>
         <p>
@@ -121,8 +121,9 @@ export default function Home({
           )}
           {lichessData && (
             <List.Item>
-              My rapid chess rating on Lichess is {lichessData.rapidRating}.
-              Invite me for a game!
+              {`My rapid chess rating on `}
+              <ExternalLink href="https://lichess.org">Lichess</ExternalLink>
+              {` is ${lichessData.rapidRating}. Invite me for a game!`}
             </List.Item>
           )}
         </List>
