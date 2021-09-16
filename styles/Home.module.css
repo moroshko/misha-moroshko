@@ -1,3 +1,6 @@
+.background {
+  display: none;
+}
 .main {
   margin: 32px auto;
   max-width: 720px;
@@ -27,5 +30,13 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .background {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 }
