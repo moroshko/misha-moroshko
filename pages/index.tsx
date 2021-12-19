@@ -83,14 +83,16 @@ export default function Home({
           <ExternalLink href="https://twitter.com/fb_engineering">
             Facebook
           </ExternalLink>
-          {` and `}
+          {`, `}
           <ExternalLink href="https://www.seek.com.au">SEEK</ExternalLink>
-          {`. Today, I’m
-              helping `}
+          {` and `}
           <ExternalLink href="https://www.latitudefinancial.com.au">
             Latitude
           </ExternalLink>
-          {` to become an employee of choice for Front End engineers.`}
+          .<br />
+          {`Today, I help `}
+          <ExternalLink href="https://muso.live">Muso</ExternalLink>
+          {` reimagining live experiences.`}
         </p>
         <p>
           {`I love building tools to `}
@@ -105,7 +107,7 @@ export default function Home({
           </ExternalLink>
           .
         </p>
-        <p>Here are some fun facts about me:</p>
+        <p>Here are some random facts about me:</p>
         <List>
           {gitHubData && (
             <List.Item>
