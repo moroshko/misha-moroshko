@@ -83,12 +83,8 @@ export default function Home({
           <ExternalLink href="https://twitter.com/fb_engineering">
             Facebook
           </ExternalLink>
-          {`, `}
-          <ExternalLink href="https://www.seek.com.au">SEEK</ExternalLink>
           {` and `}
-          <ExternalLink href="https://www.latitudefinancial.com.au">
-            Latitude
-          </ExternalLink>
+          <ExternalLink href="https://www.seek.com.au">SEEK</ExternalLink>
           .<br />
           {`Today, I help `}
           <ExternalLink href="https://muso.live">Muso</ExternalLink>
