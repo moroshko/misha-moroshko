@@ -87,7 +87,7 @@ export default function Home({
           <ExternalLink href="https://www.seek.com.au">SEEK</ExternalLink>
           .<br />
           {`Today, I help `}
-          <ExternalLink href="https://muso.live">Muso</ExternalLink>
+          <ExternalLink href="https://surreal.live">Surreal</ExternalLink>
           {` reimagining live experiences.`}
         </p>
         <p>
